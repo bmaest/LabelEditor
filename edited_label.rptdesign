@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><report xmlns="http://www.eclipse.org/birt/2005/design" id="1" version="3.2.23">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706222054</property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">cellsPerRow</property>
+            <property name="type">integer</property>
+        </structure>
+    </list-property>
+    <property name="cellsPerRow">4</property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[importPackage(Packages.net.combase.cloud.data.pojo.statistic);
+importPackage(Packages.net.combase.cloud.reporting.birt);
+
+var request = reportContext.getAppContext().get("request");
+]]></method>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">500</property>
+    <property name="locale">de_DE</property>
+    <data-sources>
+        <script-data-source id="303" name="scriptDs"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set id="1321" name="Items">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name2</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">name3</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">name4</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">price1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">price2</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">price3</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">price4</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">number1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">number2</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">number3</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">number4</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">base1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">base2</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">base3</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">base4</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">name1</property>
+                </structure>
+                <structure>
+                    <property name="columnName">name2</property>
+                </structure>
+                <structure>
+                    <property name="columnName">name3</property>
+                </structure>
+                <structure>
+                    <property name="columnName">name4</property>
+                </structure>
+                <structure>
+                    <property name="columnName">price1</property>
+                </structure>
+                <structure>
+                    <property name="columnName">price2</property>
+                </structure>
+                <structure>
+                    <property name="columnName">price3</property>
+                </structure>
+                <structure>
+                    <property name="columnName">price4</property>
+                </structure>
+                <structure>
+                    <property name="columnName">number1</property>
+                </structure>
+                <structure>
+                    <property name="columnName">number2</property>
+                </structure>
+                <structure>
+                    <property name="columnName">number3</property>
+                </structure>
+                <structure>
+                    <property name="columnName">number4</property>
+                </structure>
+                <structure>
+                    <property name="columnName">base1</property>
+                </structure>
+                <structure>
+                    <property name="columnName">base2</property>
+                </structure>
+                <structure>
+                    <property name="columnName">base3</property>
+                </structure>
+                <structure>
+                    <property name="columnName">base4</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">name3</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">name4</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">price1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">price2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">price3</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">price4</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">number1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">number2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">number3</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">number4</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">base1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">base2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">base3</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">base4</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">scriptDs</property>
+            <method name="open"><![CDATA[it = request.getItems().iterator();]]></method>
+            <method name="fetch"><![CDATA[if (!it.hasNext())
+	return false;
+
+bean = it.next();
+
+if (bean.getArticle() != null) {
+	row["name1"] = bean.getArticle().getName();
+	row["number1"] = bean.getArticle().getNumber();
+}
+row["price1"] = bean.getPrice();
+
+if (bean.getPackagingValue() != null &amp;&amp; row["price1"] != null)
+	row["price1"] += " / " + bean.getPackagingValue();
+
+row["base1"] = bean.getBasePrice()
+
+if (it.hasNext())
+{
+	bean = it.next();
+	if (bean.getArticle() != null) {
+		row["name2"] = bean.getArticle().getName();
+		row["number2"] = bean.getArticle().getNumber();
+	}
+	row["price2"] = bean.getPrice();
+	row["packing2"] = bean.getPackagingValue()
+	row["base2"] = bean.getBasePrice()
+}
+
+if (it.hasNext())
+{
+	bean = it.next();
+	if (bean.getArticle() != null) {
+		row["name3"] = bean.getArticle().getName();
+		row["number3"] = bean.getArticle().getNumber();
+	}
+	row["price3"] = bean.getPrice();
+	row["packing3"] = bean.getPackagingValue()
+	row["base3"] = bean.getBasePrice()
+}
+
+if (it.hasNext())
+{
+	bean = it.next();
+	if (bean.getArticle() != null) {
+		row["name4"] = bean.getArticle().getName();
+		row["number4"] = bean.getArticle().getNumber();
+	}
+	row["price4"] = bean.getPrice();
+	row["packing4"] = bean.getPackagingValue()
+	row["base4"] = bean.getBasePrice()
+}
+
+return true;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style id="110" name="report">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style id="246" name="crosstab-cell">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style id="247" name="crosstab">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page id="2" name="Simple MasterPage">
+            <property name="type">a4</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">21mm</property>
+            <property name="leftMargin">9mm</property>
+            <property name="bottomMargin">21mm</property>
+            <property name="rightMargin">9mm</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+            <page-footer>
+                <text-data id="1255">
+                    <property name="display">block</property>
+                    <expression name="valueExpr" type="javascript">'&lt;script type="text/javascript"&gt;var height = document.getElementsByTagName("table")[0].clientHeight;var width = document.getElementsByTagName("table")[0].clientWidth;parent.document.getElementById("' + request.getFrameId() + '").style.height = parseInt(height)+"px";parent.document.getElementById("' + request.getFrameId() + '").style.width = parseInt(width)+"px";&lt;/script&gt;'</expression>
+                    <property name="contentType">html</property>
+                </text-data>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="1322">
+            <property name="dataSet">Items</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">name1</property>
+                    <text-property name="displayName">name1</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">name2</property>
+                    <text-property name="displayName">name2</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">name3</property>
+                    <text-property name="displayName">name3</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name3"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">name4</property>
+                    <text-property name="displayName">name4</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name4"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">price1</property>
+                    <text-property name="displayName">price1</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["price1"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">price2</property>
+                    <text-property name="displayName">price2</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["price2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">price3</property>
+                    <text-property name="displayName">price3</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["price3"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">price4</property>
+                    <text-property name="displayName">price4</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["price4"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">number1</property>
+                    <text-property name="displayName">number1</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["number1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">base1</property>
+                    <text-property name="displayName">base1</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["base1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">number2</property>
+                    <text-property name="displayName">number2</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["number2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">number3</property>
+                    <text-property name="displayName">number3</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["number3"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">number4</property>
+                    <text-property name="displayName">number4</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["number4"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">base2</property>
+                    <text-property name="displayName">base2</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["base2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">base3</property>
+                    <text-property name="displayName">base3</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["base3"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">base4</property>
+                    <text-property name="displayName">base4</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["base4"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1346">
+                <property name="width">45.7mm</property>
+            </column>
+            <column id="1611">
+                <property name="width">3mm</property>
+            </column>
+            <column id="1347">
+                <property name="width">45.7mm</property>
+            </column>
+            <column id="1613">
+                <property name="width">3mm</property>
+            </column>
+            <column id="1348">
+                <property name="width">45.7mm</property>
+            </column>
+            <column id="1615">
+                <property name="width">3mm</property>
+            </column>
+            <column id="1349">
+                <property name="width">45.7mm</property>
+            </column>
+            <detail>
+                <row id="1332">
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="height">21.2mm</property>
+                    <cell id="1333">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0mm</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0mm</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">middle</property>
+                        <grid id="1626">
+                            <property name="marginTop">2mm</property>
+                            <property name="marginLeft">2mm</property>
+                            <column id="1627">
+                                <property name="width">42mm</property>
+                            </column>
+                            <row id="1628">
+                                <property name="height">3mm</property>
+                                <cell id="1629">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">bottom</property>
+                                    <data id="1636">
+                                        <property name="fontSize">2mm</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">number1</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1630">
+                                <property name="height">7mm</property>
+                                <cell id="1631">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <grid id="1639">
+                                        <property name="fontSize">3mm</property>
+                                        <column id="1640"/>
+                                        <row id="1641">
+                                            <property name="height">7mm</property>
+                                            <cell id="1642">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
+                                                <property name="paddingBottom">0pt</property>
+                                                <property name="paddingRight">0pt</property>
+                                                <property name="textAlign">left</property>
+                                                <data id="1643">
+                                                    <property name="fontSize">3mm</property>
+                                                    <property name="resultSetColumn">name1</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="1632">
+                                <property name="fontSize">3mm</property>
+                                <property name="textAlign">right</property>
+                                <property name="height">4mm</property>
+                                <cell id="1633">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="1638">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="resultSetColumn">price1</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1634">
+                                <property name="fontSize">2mm</property>
+                                <property name="textAlign">right</property>
+                                <property name="height">3mm</property>
+                                <cell id="1635">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="1644">
+                                        <property name="resultSetColumn">base1</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="1610">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0mm</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0mm</property>
+                    </cell>
+                    <cell id="1335">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0mm</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0mm</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">middle</property>
+                        <grid id="1645">
+                            <property name="marginTop">2mm</property>
+                            <property name="marginLeft">1mm</property>
+                            <column id="1646">
+                                <property name="width">42mm</property>
+                            </column>
+                            <row id="1647">
+                                <property name="height">3mm</property>
+                                <cell id="1648">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">bottom</property>
+                                    <data id="1699">
+                                        <property name="fontSize">2mm</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">number2</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1650">
+                                <property name="height">7mm</property>
+                                <cell id="1651">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <grid id="1652">
+                                        <property name="fontSize">3mm</property>
+                                        <column id="1653"/>
+                                        <row id="1654">
+                                            <property name="height">7mm</property>
+                                            <cell id="1655">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
+                                                <property name="paddingBottom">0pt</property>
+                                                <property name="paddingRight">0pt</property>
+                                                <property name="textAlign">left</property>
+                                                <data id="1702">
+                                                    <property name="resultSetColumn">name2</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="1657">
+                                <property name="fontSize">3mm</property>
+                                <property name="textAlign">right</property>
+                                <property name="height">4mm</property>
+                                <cell id="1658">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="1706">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="resultSetColumn">price2</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1660">
+                                <property name="fontSize">2mm</property>
+                                <property name="textAlign">right</property>
+                                <property name="height">3mm</property>
+                                <cell id="1661">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="1709">
+                                        <property name="resultSetColumn">base2</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="1612">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0mm</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0mm</property>
+                    </cell>
+                    <cell id="1337">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0mm</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0mm</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">middle</property>
+                        <grid id="1663">
+                            <property name="marginTop">2mm</property>
+                            <column id="1664">
+                                <property name="width">42mm</property>
+                            </column>
+                            <row id="1665">
+                                <property name="height">3mm</property>
+                                <cell id="1666">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">bottom</property>
+                                    <data id="1700">
+                                        <property name="fontSize">2mm</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">number3</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1668">
+                                <property name="height">7mm</property>
+                                <cell id="1669">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <grid id="1670">
+                                        <property name="fontSize">3mm</property>
+                                        <column id="1671"/>
+                                        <row id="1672">
+                                            <property name="height">7mm</property>
+                                            <cell id="1673">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
+                                                <property name="paddingBottom">0pt</property>
+                                                <property name="paddingRight">0pt</property>
+                                                <property name="textAlign">left</property>
+                                                <data id="1703">
+                                                    <property name="resultSetColumn">name3</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="1675">
+                                <property name="fontSize">3mm</property>
+                                <property name="textAlign">right</property>
+                                <property name="height">4mm</property>
+                                <cell id="1676">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="1707">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="resultSetColumn">price3</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1678">
+                                <property name="fontSize">2mm</property>
+                                <property name="textAlign">right</property>
+                                <property name="height">3mm</property>
+                                <cell id="1679">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="1710">
+                                        <property name="resultSetColumn">base3</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="1614">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0mm</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0mm</property>
+                    </cell>
+                    <cell id="1339">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0mm</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0mm</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">middle</property>
+                        <grid id="1681">
+                            <property name="marginTop">2mm</property>
+                            <column id="1682">
+                                <property name="width">42mm</property>
+                            </column>
+                            <row id="1683">
+                                <property name="height">3mm</property>
+                                <cell id="1684">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">bottom</property>
+                                    <data id="1701">
+                                        <property name="fontSize">2mm</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">number4</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1686">
+                                <property name="height">7mm</property>
+                                <cell id="1687">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <grid id="1688">
+                                        <property name="fontSize">3mm</property>
+                                        <column id="1689"/>
+                                        <row id="1690">
+                                            <property name="height">7mm</property>
+                                            <cell id="1691">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
+                                                <property name="paddingBottom">0pt</property>
+                                                <property name="paddingRight">0pt</property>
+                                                <property name="textAlign">left</property>
+                                                <data id="1705">
+                                                    <property name="resultSetColumn">name4</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="1693">
+                                <property name="fontSize">3mm</property>
+                                <property name="textAlign">right</property>
+                                <property name="height">4mm</property>
+                                <cell id="1694">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="1708">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="resultSetColumn">price4</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1696">
+                                <property name="fontSize">2mm</property>
+                                <property name="textAlign">right</property>
+                                <property name="height">3mm</property>
+                                <cell id="1697">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="1711">
+                                        <property name="resultSetColumn">base4</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

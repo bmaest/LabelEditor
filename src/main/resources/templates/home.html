@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Label Editor</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h2>Label Editor</h2>
+
+  <div class="form-group">
+    <label for="width">Width (in):</label>
+    <input id="width" type="number" value="1.5" step="0.1">
+    <label for="height">Height (in):</label>
+    <input id="height" type="number" value="1" step="0.1">
+    <button onclick="updateLabel()">Update</button>
+  </div>
+
+  <form id="uploadForm" enctype="multipart/form-data" class="form-group">
+    <input type="file" name="file" accept=".rptdesign" required>
+    <input type="submit" value="Upload .rptdesign">
+  </form>
+
+  <div id="labelCanvas">
+    <div id="labelBox"></div>
+  </div>
+
+  <div id="downloadContainer">
+    <button onclick="downloadFile()">Download Edited File</button>
+  </div>
+
+  <script>
+    function updateLabel() {
+      const w = parseFloat(document.getElementById('width').value);
+      const h = parseFloat(document.getElementById('height').value);
+      const scale = 102;
+      const label = document.getElementById('labelBox');
+      label.style.width = (w * scale) + 'px';
+      label.style.height = (h * scale) + 'px';
+
+      fetch('/create-label', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ widthInInches: w, heightInInches: h })
+      }).catch(err => alert("Label update failed: " + err));
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      resetLabel()
+        .then(() => {
+          return fetch('/upload', {
+            method: 'POST',
+            body: formData
+          });
+        })
+        .then(response => {
+          if (!response.ok) throw new Error("Upload failed");
+          return response.text();
+        })
+        .then(() => {
+          updateLabelSizeFromFile();
+          renderLabelElements();
+        })
+        .catch(err => alert("Upload failed: " + err));
+    });
+
+    function downloadFile() {
+      window.location.href = '/download';
+    }
+
+    updateLabel();
+
+    function renderLabelElements() {
+      fetch('/label-elements')
+        .then(res => res.json())
+        .then(elements => {
+          const box = document.getElementById('labelBox');
+          box.innerHTML = '';
+
+          elements.forEach(el => {
+            const div = document.createElement('div');
+            div.textContent = el.content;
+            div.style.position = 'absolute';
+            div.style.left = el.x + 'px';
+            div.style.top = el.y + 'px';
+            div.style.width = el.width + 'px';
+            div.style.height = el.height + 'px';
+            div.style.border = '1px dashed #999';
+            div.style.color = '#000';
+            div.style.padding = '2px';
+            div.style.overflow = 'hidden';
+            box.appendChild(div);
+          });
+        });
+    }
+
+    function updateLabelSizeFromFile() {
+      fetch('/label-size')
+        .then(res => res.json())
+        .then(size => {
+          document.getElementById('width').value = (size.width / 100).toFixed(2);
+          document.getElementById('height').value = (size.height / 100).toFixed(2);
+          updateLabel();
+        });
+    }
+
+    function resetLabel() {
+      return fetch('/label/reset', { method: 'POST' });
+    }
+  </script>
+</body>
+</html>
