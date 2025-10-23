@@ -25,4 +25,7 @@ public class LabelBody {
     public LabelStyle getStyle() { 
         return style; 
     }
+    public List<LabelProperty> getProperties(){
+        return properties;
+    }
 }

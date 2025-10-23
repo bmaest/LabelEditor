@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706222054</property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">cellsPerRow</property>
+            <property name="type">integer</property>
+        </structure>
+    </list-property>
+    <property name="cellsPerRow">1</property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[importPackage(Packages.net.combase.cloud.data.pojo.statistic);
+importPackage(Packages.net.combase.cloud.reporting.birt);
+
+var request = reportContext.getAppContext().get("request");
+
+var barcodeHeight = 8;
+var barcodeFontSize = 2;
+var barcodeWidth = 48;]]></method>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">500</property>
+    <property name="locale">en_US</property>
+    <data-sources>
+        <script-data-source name="scriptDs" id="303"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="rows" id="1308">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">firstArticleName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">firstArticleNumber</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">firstBarcode</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">firstPackagingValue</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">firstBasePrice</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">firstPrice</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">firstCompany</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">firstBarcodeType</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">basePriceLabel</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">firstArticleName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstArticleNumber</property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstBarcode</property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstPackagingValue</property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstBasePrice</property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstPrice</property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstCompany</property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstBarcodeType</property>
+                </structure>
+                <structure>
+                    <property name="columnName">basePriceLabel</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">firstArticleName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">firstArticleNumber</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">firstBarcode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">firstPackagingValue</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">firstBasePrice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">firstPrice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">firstCompany</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">firstBarcodeType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">basePriceLabel</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">scriptDs</property>
+            <method name="open"><![CDATA[it = request.getItems().iterator();]]></method>
+            <method name="fetch"><![CDATA[if (!it.hasNext())
+	return false;
+
+bean = it.next();
+
+row["firstArticleName"] = bean.getArticleName();
+row["firstArticleNumber"] = bean.getArticleNumber();
+row["firstBarcode"] = bean.getBarcode();
+row["firstPackagingValue"] = bean.getPackagingValue();
+row["firstBasePrice"] = bean.getBasePrice();
+row["firstPrice"] = bean.getPrice();
+row["firstCompany"] = bean.getCompany();
+row["firstBarcodeType"] = bean.getBarcodeType();
+
+row["basePriceLabel"] = request.getBasePriceName();
+return true;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="110">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="246">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="247">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+</report>

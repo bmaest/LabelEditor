@@ -4,6 +4,14 @@ public class LabelProperty {
     private String name;
     private String value;
 
+    public LabelProperty(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
+
+    public LabelProperty() {
+    }
+
     @Override
     public String toString() {
         return name + "=" + value;

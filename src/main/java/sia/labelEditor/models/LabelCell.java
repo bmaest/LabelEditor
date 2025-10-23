@@ -6,16 +6,12 @@ public class LabelCell {
     private List<LabelProperty> properties;
     private int x, y;
     private String id;
-    private LabelDimension width;
-    private LabelDimension height;
     private LabelStyle style;
 
     @Override
     public String toString() {
         return "Cell[id=" + id +
             ", x=" + x + ", y=" + y +
-            ", w=" + (width != null ? width.getRaw() : "null") +
-            ", h=" + (height != null ? height.getRaw() : "null") +
             ", content=" + content + "]";
     }
 
@@ -33,12 +29,6 @@ public class LabelCell {
     }
     public void setY(int y){
         this.y = y;
-    }
-    public void setWidth(LabelDimension dim) { 
-        this.width = dim; 
-    }
-    public void setHeight(LabelDimension dim) { 
-        this.height = dim; 
     }
     public void setId(String id) { 
         this.id = id; 
@@ -58,12 +48,6 @@ public class LabelCell {
     }
     public int getY(){
         return y;
-    }
-    public LabelDimension getWidth() { 
-        return width; 
-    }
-    public LabelDimension getHeight() { 
-        return height; 
     }
     public String getId() { 
         return id; 

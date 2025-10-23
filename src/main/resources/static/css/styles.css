@@ -1,78 +1,179 @@
-    body {
-      background: #222;
-      color: #eee;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
-    }
+/* Global layout */
+body {
+  margin: 0;
+  padding: 0;
+  background: #222;
+  color: #eee;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 
-    h2 {
-      margin-bottom: 20px;
-    }
+/* Page title */
+*header {
+  background-color: #38444E;
+}
 
-    .form-group {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+h2 {
+  margin: 20px;
+}
 
-    label {
-      margin-right: 5px;
-    }
+/* Main layout container */
+#layoutContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;        /* prevent stacking */
+  align-items: stretch;
+  height: calc(100vh - 60px); /* subtract title height */
+  width: 100%;
+  box-sizing: border-box;
+}
 
-    input[type="number"],
-    input[type="file"] {
-      background-color: #333;
-      color: #eee;
-      border: 1px solid #555;
-      padding: 6px 10px;
-      border-radius: 4px;
-    }
+/* Left panel (tools, future features) */
+#leftPanel {
+  flex: 0 0 15%;            /* fixed 25% of container */
+  min-width: 180px;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #2a2a2a;
+  border-right: 1px solid #444;
+  overflow-y: auto;
+}
 
-    button,
-    input[type="submit"] {
-      background-color: #EF5601;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
+#centerPanel {
+  display: flex;
+  flex-direction: column;   /* stack header/form, canvas, download vertically */
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
 
-    button:hover,
-    input[type="submit"]:hover {
-      background-color: #F7931E;
-      transform: scale(1.03);
-    }
+/* Right panel (structure tree + future features) */
+#rightPanel {
+  flex: 0 0 15%;            /* fixed 25% of container */
+  min-width: 180px;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #2a2a2a;
+  border-left: 1px solid #444;
+  overflow-y: auto;
+}
 
-    button:active,
-    input[type="submit"]:active {
-      background-color: #F7931E;
-      transform: scale(0.98);
-    }
+/* Form styling */
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-    #labelCanvas {
-      background: #38444E;
-      padding: 20px;
-      border: 1px solid #444;
-      margin-bottom: 20px;
-    }
+label {
+  margin-right: 5px;
+}
 
-    #labelBox {
-      background: white;
-      border: 1px solid black;
-      transform-origin: top left;
-    }
+input[type="number"],
+input[type="file"] {
+  background-color: #333;
+  color: #eee;
+  border: 1px solid #555;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
 
-    #downloadContainer {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
+/* Buttons */
+button,
+input[type="submit"] {
+  background-color: #EF5601;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #F7931E;
+  transform: scale(1.03);
+}
+
+button:active,
+input[type="submit"]:active {
+  background-color: #F7931E;
+  transform: scale(0.98);
+}
+
+/* center the canvas inside the center panel */
+#labelCanvas {
+  background: #38444E;
+  padding: 20px;
+  border: 1px solid #444;
+  margin: auto;             /* centers horizontally and vertically in a flex column */
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 200px); /* prevent overflowing the viewport */
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+/* make labelBox size itself to content and not force full width */
+#labelBox {
+  position: relative;
+  background: white;
+  border: 1px solid black;
+  transform-origin: top left;
+  display: inline-block;
+}
+
+/* Download button container */
+#downloadContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Structure tree */
+.scroll-box {
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  border: 1px solid #555;
+  padding: 5px;
+  background-color: #1e1e1e;
+  color: #eee;
+}
+
+.tree-node {
+  margin-left: 1em;
+  font-family: monospace;
+  font-size: 1.0em;
+}
+
+.tree-label {
+  margin-left: 0.3em;
+  cursor: default;
+}
+
+.tree-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.0em;
+  padding: 0 2px;
+  margin-right: 2px;
+  vertical-align: middle;
+  color: #EF5601;
+}
+
+.tree-children.hidden {
+  display: none;
+}

@@ -93,15 +93,14 @@ public class LabelParser {
         LabelCell cell = new LabelCell();
         cell.setId(cellElement.getAttribute("id"));
         List<LabelProperty> props = parseProperties(cellElement);
+        LabelStyle style = new LabelStyle(props);
         cell.setProperties(props);
-        cell.setStyle(new LabelStyle(props));
+        cell.setStyle(style);
 
         for (LabelProperty prop : props) {
             switch (prop.getName()) {
                 case "x" -> cell.setX(parseDimensionAsInt(prop.getValue()));
                 case "y" -> cell.setY(parseDimensionAsInt(prop.getValue()));
-                case "width" -> cell.setWidth(new LabelDimension(prop.getValue()));
-                case "height" -> cell.setHeight(new LabelDimension(prop.getValue()));
             }
         }
 
@@ -115,12 +114,6 @@ public class LabelParser {
                     switch (prop.getName()) {
                         case "x" -> cell.setX(parseDimensionAsInt(prop.getValue()));
                         case "y" -> cell.setY(parseDimensionAsInt(prop.getValue()));
-                        case "width" -> {
-                            if (cell.getWidth() == null) cell.setWidth(new LabelDimension(prop.getValue()));
-                        }
-                        case "height" -> {
-                            if (cell.getHeight() == null) cell.setHeight(new LabelDimension(prop.getValue()));
-                        }
                     }
                 }
             }

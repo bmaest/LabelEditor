@@ -27,19 +27,21 @@ public class HomeController {
     }
 
     @PostMapping("/create-label")
-    @ResponseBody
-    public ResponseEntity<String> createLabel(@RequestBody LabelRequest request) {
-        labelService.createLabel(request.widthInInches, request.heightInInches);
-        return ResponseEntity.ok("Label created");
+    public ResponseEntity<String> updateLabel(@RequestBody LabelRequest request) {
+        labelService.updateLabelDimensions(request.widthInInches, request.heightInInches);
+        return ResponseEntity.ok("Label updated");
     }
 
     @GetMapping("/download-label")
-    public ResponseEntity<Resource> downloadLabel() throws IOException {
-        File file = labelService.getLabelFile();
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+    public ResponseEntity<Resource> downloadLabel() throws Exception {
+        ByteArrayOutputStream out = labelService.getLabelStream();
+        ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+        InputStreamResource resource = new InputStreamResource(in);
+
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=label.rptdesign")
             .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .contentLength(out.size())
             .body(resource);
     }
 
@@ -105,5 +107,10 @@ public class HomeController {
             labelService.reset();
             return ResponseEntity.ok().build();
         }
+    }
+
+    @GetMapping("/label-structure")
+    public ResponseEntity<Map<String, Object>> getLabelStructure() {
+        return ResponseEntity.ok(labelService.getLabelStructure());
     }
 }

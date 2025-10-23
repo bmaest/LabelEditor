@@ -10,14 +10,24 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
+
+import sia.labelEditor.models.LabelBody;
+import sia.labelEditor.models.LabelCell;
+import sia.labelEditor.models.LabelDetail;
 import sia.labelEditor.models.LabelDocument;
+import sia.labelEditor.models.LabelGrid;
+import sia.labelEditor.models.LabelProperty;
+import sia.labelEditor.models.LabelRow;
+import sia.labelEditor.models.LabelTable;
+import sia.labelEditor.models.NestedGridContent;
 import sia.labelEditor.parser.LabelParser;
+import sia.labelEditor.writer.LabelWriter;
 
 @Service
 public class LabelService {
 
     private LabelDocument labelDoc;
-    private Document rawDoc; // optional: keep raw DOM for export
+    private Document rawDoc;
     private final LabelParser parser = new LabelParser();
     private final Path outputPath = Paths.get("label.rptdesign");
 
@@ -68,12 +78,25 @@ public class LabelService {
     }
 
     public File getLabelFile() {
-        if (rawDoc == null) return null;
         try {
             File output = new File("edited_label.rptdesign");
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.transform(new DOMSource(rawDoc), new StreamResult(output));
-            return output;
+
+            if (labelDoc != null) {
+                LabelWriter writer = new LabelWriter();
+                ByteArrayOutputStream mem = writer.writeToMemory(labelDoc);
+                try (FileOutputStream fos = new FileOutputStream(output)) {
+                    mem.writeTo(fos);
+                }
+                return output;
+            }
+
+            if (rawDoc != null) {
+                Transformer transformer = TransformerFactory.newInstance().newTransformer();
+                transformer.transform(new DOMSource(rawDoc), new StreamResult(output));
+                return output;
+            }
+
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -129,6 +152,26 @@ public class LabelService {
         return size;
     }
 
+    public void updateLabelDimensions(double width, double height) {
+        if (labelDoc == null || labelDoc.getBody() == null || labelDoc.getBody().getTable() == null) {
+            throw new IllegalStateException("LabelDocument not initialized");
+        }
+
+        LabelTable table = labelDoc.getBody().getTable();
+        updateProperty(table.getProperties(), "width", width + "in");
+        updateProperty(table.getProperties(), "height", height + "in");
+    }
+
+    private void updateProperty(List<LabelProperty> props, String name, String newValue) {
+        for (LabelProperty prop : props) {
+            if (prop.getName().equals(name)) {
+                prop.setValue(newValue);
+                return;
+            }
+        }
+        props.add(new LabelProperty(name, newValue));
+    }
+
     private int parseDimension(String value) {
         try {
             value = value.trim().toLowerCase();
@@ -153,5 +196,51 @@ public class LabelService {
         this.labelDoc = null;
         this.rawDoc = null;
         System.out.println("LabelService: state reset");
+    }
+
+    public ByteArrayOutputStream getLabelStream() throws Exception {
+        LabelWriter writer = new LabelWriter();
+        return writer.writeToMemory(labelDoc);
+    }
+
+    public Map<String, Object> getLabelStructure() {
+        if (labelDoc == null) return Map.of("name", "LabelDocument", "children", List.of());
+        return buildNode("LabelDocument", labelDoc);
+    }
+
+    private Map<String, Object> buildNode(String name, Object obj) {
+        Map<String, Object> node = new LinkedHashMap<>();
+        node.put("name", name);
+        List<Map<String, Object>> children = new ArrayList<>();
+
+        if (obj instanceof LabelDocument doc) {
+            children.add(buildNode("Body", doc.getBody()));
+        } else if (obj instanceof LabelBody body) {
+            children.add(buildNode("Table", body.getTable()));
+        } else if (obj instanceof LabelTable table) {
+            for (int i = 0; i < table.getColumns().size(); i++) {
+                children.add(buildNode("Column[" + i + "]", table.getColumns().get(i)));
+            }
+            children.add(buildNode("Detail", table.getDetail()));
+        } else if (obj instanceof LabelDetail detail) {
+            for (int i = 0; i < detail.getRows().size(); i++) {
+                children.add(buildNode("Row[" + i + "]", detail.getRows().get(i)));
+            }
+        } else if (obj instanceof LabelRow row) {
+            for (int i = 0; i < row.getCells().size(); i++) {
+                children.add(buildNode("Cell[" + i + "]", row.getCells().get(i)));
+            }
+        } else if (obj instanceof LabelCell cell) {
+            if (cell.getContent() instanceof NestedGridContent ngc) {
+                children.add(buildNode("Grid", ngc.getGrid()));
+            }
+        } else if (obj instanceof LabelGrid grid) {
+            for (int i = 0; i < grid.getRows().size(); i++) {
+                children.add(buildNode("Row[" + i + "]", grid.getRows().get(i)));
+            }
+        }
+
+        if (!children.isEmpty()) node.put("children", children);
+        return node;
     }
 }

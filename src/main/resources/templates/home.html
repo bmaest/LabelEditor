@@ -6,27 +6,46 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <h2>Label Editor</h2>
-
-  <div class="form-group">
-    <label for="width">Width (in):</label>
-    <input id="width" type="number" value="1.5" step="0.1">
-    <label for="height">Height (in):</label>
-    <input id="height" type="number" value="1" step="0.1">
-    <button onclick="updateLabel()">Update</button>
+  <div class="header">
+    <h2>Label Editor Tool</h2>
   </div>
 
-  <form id="uploadForm" enctype="multipart/form-data" class="form-group">
-    <input type="file" name="file" accept=".rptdesign" required>
-    <input type="submit" value="Upload .rptdesign">
-  </form>
+  <div id="layoutContainer">
+    <!-- Left panel -->
+    <div id="leftPanel">
+      <h3>Left Panel</h3>
+      <!-- Future tools go here -->
+    </div>
 
-  <div id="labelCanvas">
-    <div id="labelBox"></div>
-  </div>
+    <!-- Center panel -->
+    <div id="centerPanel">
+      <div class="form-group">
+        <label for="width">Width (in):</label>
+        <input id="width" type="number" value="1.5" step="0.1">
+        <label for="height">Height (in):</label>
+        <input id="height" type="number" value="1" step="0.1">
+        <button onclick="updateLabel()">Update</button>
+      </div>
 
-  <div id="downloadContainer">
-    <button onclick="downloadFile()">Download Edited File</button>
+      <form id="uploadForm" enctype="multipart/form-data" class="form-group">
+        <input type="file" name="file" accept=".rptdesign" required>
+        <input type="submit" value="Upload .rptdesign">
+      </form>
+
+      <div id="labelCanvas">
+        <div id="labelBox"></div>
+      </div>
+
+      <div id="downloadContainer">
+        <button onclick="downloadFile()">Download Edited File</button>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div id="rightPanel">
+      <h3>File Structure</h3>
+      <div id="labelStructure" class="scroll-box"></div>
+    </div>
   </div>
 
   <script>
@@ -63,6 +82,7 @@
         .then(() => {
           updateLabelSizeFromFile();
           renderLabelElements();
+          loadLabelStructure();
         })
         .catch(err => alert("Upload failed: " + err));
     });
@@ -70,8 +90,6 @@
     function downloadFile() {
       window.location.href = '/download';
     }
-
-    updateLabel();
 
     function renderLabelElements() {
       fetch('/label-elements')
@@ -108,8 +126,53 @@
     }
 
     function resetLabel() {
-      return fetch('/label/reset', { method: 'POST' });
+          return fetch('/label/reset', { method: 'POST' });
+        }
+
+        function renderTreeNode(node) {
+      const container = document.createElement('div');
+      container.className = 'tree-node';
+
+      const label = document.createElement('span');
+      label.textContent = node.name;
+      label.className = 'tree-label';
+      container.appendChild(label);
+
+      if (node.children) {
+        const toggle = document.createElement('button');
+        toggle.textContent = '▶'; // collapsed icon
+        toggle.className = 'tree-toggle';
+
+        const childContainer = document.createElement('div');
+        childContainer.className = 'tree-children hidden'; // ← hide by default
+
+        toggle.onclick = () => {
+          childContainer.classList.toggle('hidden');
+          toggle.textContent = childContainer.classList.contains('hidden') ? '▶' : '▼';
+        };
+
+        container.insertBefore(toggle, label);
+        node.children.forEach(child => childContainer.appendChild(renderTreeNode(child)));
+        container.appendChild(childContainer);
+      }
+
+      return container;
     }
+
+    function loadLabelStructure() {
+      fetch('/label-structure')
+        .then(res => res.json())
+        .then(data => {
+          const root = renderTreeNode(data);
+          const panel = document.getElementById('labelStructure');
+          panel.innerHTML = '';
+          panel.appendChild(root);
+        });
+    }
+
+    // Initial load
+    updateLabel();
+    loadLabelStructure();
   </script>
 </body>
 </html>
